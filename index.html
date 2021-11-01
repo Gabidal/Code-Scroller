@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/default.min.css">
+        <script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script>
+        <link rel="stylesheet" href="Dark.css"></link>
+     </head>
+    <body id="haloo">
+        
+        <div id="code">
+        </div>
+
+        <div id="end"></div>
+        <script> 
+            Insert_File_Contents().then(()=>{
+                hljs.highlightAll()
+                const Main = document.getElementById("haloo")
+                var Y = 0;
+                setInterval(() => { 
+                    window.scroll(0, Y += 5)
+                }, 16)
+            })
+            
+            
+
+            async function Insert_File_Contents(){
+                var Header = "<pre>\n<code class=\"language-cpp\">\n"
+
+                var file = await fetch("/Source_Code.txt")
+                Header += await file.text();
+
+                Header += "\n</code>\n</pre>\n"
+
+                var Element = document.getElementById("code")
+                Element.innerHTML = Header
+            }
+        </script>
+    </body>
+
+</html>
